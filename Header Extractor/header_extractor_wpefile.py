@@ -1,6 +1,8 @@
+import pefile
 import json
 import csv
-import pefile
+import os
+import argparse
 from datetime import datetime
 
 def extract_dos_header(file_path):
@@ -138,50 +140,76 @@ def save_to_csv(data, output_file):
         print(f"CSV data saved to {output_file}")
     except Exception as e:
         print(f"Error saving CSV: {str(e)}")
-
-def main():
-    input_file = "example.exe"  # Replace with your PE file path
+def process_pe_file(input_path, output_dir=None):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    base_name = os.path.splitext(os.path.basename(input_path))[0]
     
-    # DOS Header output files
-    dos_json_output = f"dos_header_{timestamp}.json"
-    dos_csv_output = f"dos_header_{timestamp}.csv"
+    # Determine output directory
+    if output_dir is None:
+        output_dir = os.path.dirname(input_path) or "."
     
-    # Rich Header output files
-    rich_json_output = f"rich_header_{timestamp}.json"
-    rich_csv_output = f"rich_header_{timestamp}.csv"
+    # Ensure output directory exists
+    os.makedirs(output_dir, exist_ok=True)
     
-    # File Header output files
-    file_json_output = f"file_header_{timestamp}.json"
-    file_csv_output = f"file_header_{timestamp}.csv"
+    # Output filenames
+    dos_json_output = os.path.join(output_dir, f"{base_name}_dos_header_{timestamp}.json")
+    dos_csv_output = os.path.join(output_dir, f"{base_name}_dos_header_{timestamp}.csv")
+    rich_json_output = os.path.join(output_dir, f"{base_name}_rich_header_{timestamp}.json")
+    rich_csv_output = os.path.join(output_dir, f"{base_name}_rich_header_{timestamp}.csv")
+    file_json_output = os.path.join(output_dir, f"{base_name}_file_header_{timestamp}.json")
+    file_csv_output = os.path.join(output_dir, f"{base_name}_file_header_{timestamp}.csv")
+    nt_json_output = os.path.join(output_dir, f"{base_name}_nt_optional_header_{timestamp}.json")
+    nt_csv_output = os.path.join(output_dir, f"{base_name}_nt_optional_header_{timestamp}.csv")
     
-    # NT Header (Optional Header) output files
-    nt_json_output = f"nt_optional_header_{timestamp}.json"
-    nt_csv_output = f"nt_optional_header_{timestamp}.csv"
-    
-    # Extract and save DOS Header
-    dos_header_data = extract_dos_header(input_file)
+    # Extract and save headers
+    dos_header_data = extract_dos_header(input_path)
     if dos_header_data:
         save_to_json(dos_header_data, dos_json_output)
         save_to_csv(dos_header_data, dos_csv_output)
     
-    # Extract and save Rich Header
-    rich_header_data = extract_rich_header(input_file)
+    rich_header_data = extract_rich_header(input_path)
     if rich_header_data:
         save_to_json(rich_header_data, rich_json_output)
         save_to_csv(rich_header_data, rich_csv_output)
     
-    # Extract and save File Header
-    file_header_data = extract_file_header(input_file)
+    file_header_data = extract_file_header(input_path)
     if file_header_data:
         save_to_json(file_header_data, file_json_output)
         save_to_csv(file_header_data, file_csv_output)
     
-    # Extract and save NT Header (Optional Header)
-    nt_header_data = extract_nt_header(input_file)
+    nt_header_data = extract_nt_header(input_path)
     if nt_header_data:
         save_to_json(nt_header_data, nt_json_output)
         save_to_csv(nt_header_data, nt_csv_output)
+
+# pip install pefile
+# python3 header_extractor_wpefile.py <pe_file_or_directory>
+def main():
+    # Set up command-line argument parsing
+    parser = argparse.ArgumentParser(description="Extract PE header information from a file or directory.")
+    parser.add_argument("input_path", help="Path to a single PE file or a directory containing PE files (e.g., bin/pe)")
+    args = parser.parse_args()
+    
+    input_path = args.input_path
+    
+    # Check if input is a file or directory
+    if os.path.isfile(input_path):
+        # Single file processing
+        process_pe_file(input_path)
+    elif os.path.isdir(input_path):
+        # Directory processing
+        output_dir = os.path.join(os.path.dirname(__file__), "bin", "pe_extracted")
+        os.makedirs(output_dir, exist_ok=True)
+        
+        # Process all PE files in the directory
+        for filename in os.listdir(input_path):
+            file_path = os.path.join(input_path, filename)
+            if os.path.isfile(file_path) and filename.lower().endswith(('.exe', '.dll')):
+                print(f"Processing {file_path}")
+                process_pe_file(file_path, output_dir)
+    else:
+        print(f"Error: {input_path} is neither a file nor a directory")
+        return
 
 if __name__ == "__main__":
     main()
