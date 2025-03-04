@@ -4,6 +4,7 @@ import csv
 import os
 import argparse
 from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor
 
 def extract_dos_header(file_path):
     try:
@@ -181,32 +182,45 @@ def process_pe_file(input_path, output_dir=None):
     if nt_header_data:
         save_to_json(nt_header_data, nt_json_output)
         save_to_csv(nt_header_data, nt_csv_output)
-
 # pip install pefile
-# python3 header_extractor_wpefile.py <pe_file_or_directory>
+# python3 header_extractor_wpefile.py <pe_file_or_directory> ...
 def main():
     # Set up command-line argument parsing
     parser = argparse.ArgumentParser(description="Extract PE header information from a file or directory.")
     parser.add_argument("input_path", help="Path to a single PE file or a directory containing PE files (e.g., bin/pe)")
+    parser.add_argument("-t", "--threads", type=int, default=1, help="Number of threads to use (default: 1)")
     args = parser.parse_args()
     
     input_path = args.input_path
+    num_threads = max(1, args.threads)  # Ensure at least 1 thread
     
     # Check if input is a file or directory
     if os.path.isfile(input_path):
-        # Single file processing
+        # Single file processing (no threading needed)
+        print(f"Processing {input_path} with 1 thread")
         process_pe_file(input_path)
     elif os.path.isdir(input_path):
-        # Directory processing
+        # Directory processing with threading
         output_dir = os.path.join(os.path.dirname(__file__), "bin", "pe_extracted")
         os.makedirs(output_dir, exist_ok=True)
         
-        # Process all PE files in the directory
-        for filename in os.listdir(input_path):
-            file_path = os.path.join(input_path, filename)
-            if os.path.isfile(file_path) and filename.lower().endswith(('.exe', '.dll')):
-                print(f"Processing {file_path}")
-                process_pe_file(file_path, output_dir)
+        # Collect PE files
+        pe_files = [
+            os.path.join(input_path, filename)
+            for filename in os.listdir(input_path)
+            if os.path.isfile(os.path.join(input_path, filename)) and 
+               filename.lower().endswith(('.exe', '.dll'))
+        ]
+        
+        if not pe_files:
+            print(f"No PE files found in {input_path}")
+            return
+        
+        print(f"Processing {len(pe_files)} PE files in {input_path} with {num_threads} thread(s)")
+        
+        # Use ThreadPoolExecutor to process files in parallel
+        with ThreadPoolExecutor(max_workers=num_threads) as executor:
+            executor.map(lambda file: process_pe_file(file, output_dir), pe_files)
     else:
         print(f"Error: {input_path} is neither a file nor a directory")
         return
