@@ -1,4 +1,4 @@
-# **PE Static Toolkit** | _Portable Executable (PE) Analysing Toolkit_
+# **[PE](https://youtube.com/playlist?list=PL9V4Zu3RroiU7nAvkoC3rN8Y6EQ_17X22&si=c5aU7aJbb4GHg8m-) Static Toolkit** | _Portable Executable (PE) Analysing Toolkit_
 
 [![made-with-python](http://forthebadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 [![built-with-science](https://forthebadge.com/images/badges/built-with-science.svg)](https://cyberthreatdefence.com/)
