@@ -1,3 +1,9 @@
+<p align="center">
+    <a href="https://learn.microsoft.com/windows/win32/debug/pe-format">
+      <img width="100%" src="https://github.com/cybersecurity-dev/cybersecurity-dev/blob/main/assets/Portable_Executable_32_bit_Structure.svg" />
+    </a>
+</p>
+
 # **[PE](https://youtube.com/playlist?list=PL9V4Zu3RroiU7nAvkoC3rN8Y6EQ_17X22&si=c5aU7aJbb4GHg8m-) Static Toolkit** | _Portable Executable (PE) Analysing Toolkit_
 
 [![made-with-python](http://forthebadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
@@ -35,3 +41,4 @@
  ```
  
  </details>
+
