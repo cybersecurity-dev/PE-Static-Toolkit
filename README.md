@@ -39,8 +39,10 @@
  
  ### pip install
  ```bash
- pip install -r requirements.txt
- python3 setup.py install
+python -m venv w_pe
+source w_pe/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
  ```
  
  ### conda install
