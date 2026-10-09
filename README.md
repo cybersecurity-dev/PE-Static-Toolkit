@@ -14,11 +14,79 @@
 <p align="center">
     <a href="https://github.com/cybersecurity-dev/"><img height="25" src="https://github.com/cybersecurity-dev/cybersecurity-dev/blob/main/assets/github.svg" alt="GitHub"></a>
     &nbsp;
-    <a href="https://www.youtube.com/@CyberThreatDefence"><img height="25" src="https://github.com/cybersecurity-dev/cybersecurity-dev/blob/main/assets/youtube.svg" alt="YouTube"></a>
+    <a href="https://www.youtube.com/@CyberThreatDefense"><img height="25" src="https://github.com/cybersecurity-dev/cybersecurity-dev/blob/main/assets/youtube.svg" alt="YouTube"></a>
     &nbsp;
     <a href="https://cyberthreatdefence.com/my_awesome_lists"><img height="20" src="https://github.com/cybersecurity-dev/cybersecurity-dev/blob/main/assets/blog.svg" alt="My Awesome Lists"></a>
     <img src="https://github.com/cybersecurity-dev/cybersecurity-dev/blob/main/assets/bar.gif">
 </p>
+
+
+
+```text
+Windows Artifacts
+│
+├── Portable Executable (PE)
+│   │
+│   ├── EXE
+│   │   ├── GUI Applications
+│   │   ├── Console Applications
+│   │   └── Services
+│   │
+│   ├── DLL
+│   │   ├── Shared Libraries
+│   │   ├── COM Libraries
+│   │   └── API Providers
+│   │
+│   ├── SYS
+│   │   ├── Kernel Drivers
+│   │   ├── File System Drivers
+│   │   └── Network Drivers
+│   │
+│   ├── OCX
+│   │   └── ActiveX Controls
+│   │
+│   ├── CPL
+│   │   └── Control Panel Extensions
+│   │
+│   ├── SCR
+│   │   └── Screensavers
+│   │
+│   ├── COM Server
+│   │   ├── In-Process COM (DLL)
+│   │   └── Out-of-Process COM (EXE)
+│   │
+│   └── EFI
+│       └── UEFI Modules
+│
+├── Installation Artifacts
+│   │
+│   ├── MSI
+│   ├── CAB
+│   └── Setup EXE
+│
+├── Script-Based Executables
+│   │
+│   ├── BAT
+│   ├── CMD
+│   ├── PS1
+│   ├── VBS
+│   ├── JS/JSE
+│   ├── HTA
+│   └── WSF
+│
+├── Configuration Artifacts
+│   │
+│   ├── REG
+│   ├── INF
+│   └── XML
+│
+└── Indirect Execution
+    │
+    ├── LNK
+    ├── Scheduled Tasks
+    ├── Services
+    └── WMI
+````
 
 
 <details>
@@ -61,11 +129,12 @@ pip install -r requirements.txt
 You can access the my other awesome lists [here](https://cyberthreatdefence.com/my_awesome_lists)
 
 ### Contributing
-
 [Contributions of any kind welcome, just follow the guidelines](contributing.md)!
 
 ### Contributors
-
 [Thanks goes to these contributors](https://github.com/cybersecurity-dev/PE-Static-Toolkit/graphs/contributors)!
+
+### License
+[![CC0](http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg)](http://creativecommons.org/publicdomain/zero/1.0)
 
 [🔼 Back to top](#pe-static-toolkit--portable-executable-pe-analysing-toolkit)
