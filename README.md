@@ -10,7 +10,7 @@
 
 ```mermaid
 mindmap
-  root((PE Feature Representations))
+  root((PE Feature<br/>Representations))
 
     Header-Based
       DOS Header
