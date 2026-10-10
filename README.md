@@ -8,6 +8,97 @@
         </a>
     </p>
 
+```mermaid
+mindmap
+  root((PE Feature Representations))
+
+    Header-Based
+      DOS Header
+      PE Header
+      COFF Header
+      Optional Header
+      Data Directories
+
+    Section-Based
+      Section Names
+      Section Entropy
+      Section Size
+      Section Permissions
+      Section Alignment
+      Entry Point Section
+
+    Import-Export Features
+      Import Table
+      Export Table
+      Imported DLLs
+      Imported APIs
+      Delayed Imports
+      Forwarded Exports
+
+    String-Based
+      ASCII Strings
+      Unicode Strings
+      URLs
+      IP Addresses
+      Registry Keys
+      File Paths
+
+    Opcode-Based
+      Opcodes
+      Mnemonics
+      Instruction Frequency
+      N-Grams
+      Control Transfer Instructions
+
+    Graph-Based
+      Control Flow Graph
+      Call Graph
+      API Call Graph
+      Dependency Graph
+      AST
+
+    Behavioral Features
+      Process Creation
+      File Operations
+      Registry Operations
+      Network Activity
+      Memory Operations
+
+    Sequence-Based
+      Byte Sequence
+      Instruction Sequence
+      API Sequence
+      Entropy Sequence
+      Opcode N-Grams
+
+    Image-Based
+      Grayscale Image
+      RGB Image
+      Texture Features
+      CNN Embeddings
+
+    Relationship-Based
+      File Reputation
+      File-to-File Relation
+      File-to-Host Relation
+      Process Trees
+      Campaign Clusters
+
+    Security Metadata
+      Authenticode Signature
+      Certificate Information
+      Packer Detection
+      Compiler Information
+      PDB Path
+
+    ATTACK-Based
+      Tactics
+      Techniques
+      Procedures
+      Technique Frequency
+      Technique Graph
+```
+
 # **[PE](https://youtube.com/playlist?list=PL9V4Zu3RroiU7nAvkoC3rN8Y6EQ_17X22&si=c5aU7aJbb4GHg8m-) Static Toolkit** | _Portable Executable (PE) Analysing Toolkit_
 </div>
 
